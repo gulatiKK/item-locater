@@ -29,42 +29,22 @@
                 <h1>Here you can add items which you need to remember where you kept them</h1>
                 <p>Get started and add your first item today!</p>
             </div>
-
-            <div class="showcase-form card">
+            <div class="showcase-form card" id="addWindow">
                 <h2>Add an item</h2>
-                 <!--  <form name="contact" netlify-honeypot="bot-field" method="POST" data-netlify="true">
-                    <input type="hidden" name="form-name" value="contact">
-                    <p class="hidden">
-                        <label>Don’t fill this out if you're human: <input name="bot-field" /></label>
-                      </p>
                     <div class="form-control">
-                        <input type="text" name="name" placeholder="Name" required>
+                        <input type="text" name="name" id="postName" placeholder="Name of item" required>
                     </div>
                     <div class="form-control">
-                        <input type="text" name="company" placeholder="Company Name" required>
+                        <input type="text" name="discription" id="postDiscription" placeholder="Discription" required>
                     </div>
                     <div class="form-control">
-                        <input type="email" name="email" placeholder="Email" required>
-                    </div>
-                    <input type="submit" value="Send" class="btn btn-primary">
-                </form> -->
-                 <form>
-                    <div class="form-control">
-                        <input type="text" name="name" placeholder="Name of item" required>
-                    </div>
-                    <div class="form-control">
-                        <input type="text" name="discription" placeholder="Discription" required>
-                    </div>
-                    <div class="form-control">
-                        <!-- <input type="email" name="email" placeholder="Email" required> -->
-                        <select name="OC" id="">
+                        <select name="type" id="postType" required>
                             <option value="type">----type----</option>
-                            <option value="container">Container</option>
                             <option value="object">Object</option>
+                            <option value="container">Container</option>
                         </select>
                     </div>
-                    <input type="submit" value="Send" class="btn btn-primary">
-                </form>
+                    <input type="submit"  onClick="onPostSubmit()" class="btn btn-primary">
             </div>
         </div>
     </section>
@@ -182,5 +162,8 @@
             </div>
         </div>
     </footer>
+    <script>
+        src="newuibase.js"
+    </script>
 </body>
 </html>
