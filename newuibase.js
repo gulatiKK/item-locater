@@ -16,7 +16,7 @@ const onPostSubmit = () => {
     
     
       let xhr = new XMLHttpRequest();
-      xhr.open("POST", "http://localhost:3000/api/item");
+      xhr.open("POST", "http://localhost:7800/api/item");
       xhr.setRequestHeader("Accept", "application/json");
       xhr.setRequestHeader("Content-Type", "application/json");
     

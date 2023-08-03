@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <title>Books</title>
+</head>
+<body>
+    <div class="items">
+        <hr>
+        <h1>Create New Book</h1>
+        <hr>
+    
+        <div id="postWindow" method="POST">
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input class="form-control" name="name" id="postName">
+            </div>
+    
+            <div class="form-group">
+                <label for="discription">Description</label>
+                <input class="form-control" name="discription" id="postDiscription">
+            </div>
+
+            <div class="form-group">
+                <label for="type">Type</label>
+                <select class="form-control" name="type" id="postType">
+                    <option value="">----type----</option>
+                    <option value="object">Object</option>
+                    <option value="container">Container</option>
+                </select>
+
+                <br>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+            <!-- <div class="form-group">
+                <label for="Author">Author</label>
+                <input class="form-control" name="author">
+            </div>
+
+            <div class="form-group">
+                <label for="publishedDate">Published Date</label>
+                <input type="date" class="form-control" name="publish_date">
+            </div>
+
+            <div class="form-group">
+                <label for="Publsiher">Publisher</label>
+                <input class="form-control" name="publisher">
+            </div>
+
+            <div class="form-group">
+                <label for="Number_of_Pages">Number of Pages</label>
+                <input type="number" class="form-control" name="numOfPages">
+            </div> -->
+            
+        </div>
+    </div>
+    <!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="book-list.js"></script> -->
+</body>
+</html>
