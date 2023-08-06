@@ -9,6 +9,10 @@
   --error-color: #d9534f;
 }
 
+#addWindow {
+    display: none;
+  }
+
 * {
   box-sizing: border-box;
   padding: 0;
@@ -417,6 +421,40 @@ pre {
     border-radius: 5px;
   }
   
+  #fixedbutton {
+    position: fixed;
+    bottom: 20px;
+    right: 20px; 
+    height:75px;
+    width:75px;
+}
+
+
+.button {
+    border-color: #04AA6D;
+    color: green;
+    
+    padding: 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    border-radius: 12px;
+  }
+
+.butt {
+    
+    height:50px;
+    width:50px;
+    cursor:pointer;
+}
+
+.button:hover {
+   background-color: green;
+    color:white;
+}
+
   .btn-outline {
     background-color: transparent;
     border: 1px #fff solid;
