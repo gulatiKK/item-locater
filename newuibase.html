@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
     <link rel="stylesheet" href="newuibase.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <script src="newuibase.js"></script>
     <title>Item Locater</title>
 </head>
@@ -15,8 +16,7 @@
             <h1 class="logo">Welcome to the Item Locater!</h1>
             <nav>
                 <ul>
-                    <li><a href="newuibase.html">Home</a></li>
-                    <li><a href="item-list.html" target="_blank">View all items</a></li>
+                    <li><a href="modern-website.html">Home</a></li>
                     <!-- <li><a href="docs.html">Docs</a></li> -->
                 </ul>
             </nav>
@@ -30,39 +30,37 @@
                 <h1>Here you can add items which you need to remember where you kept them</h1>
                 <p>Get started and add your first item today!</p>
             </div>
-
-            <div class="showcase-form card">
+            <div class="showcase-form card" id="addWindow">
                 <h2>Add an item</h2>
-                 <form>
                     <div class="form-control">
-                        <input type="text" name="name" placeholder="Name of item" id="postName" required>
+                        <input type="text" name="name" id="postName" placeholder="Name of item" required>
                     </div>
                     <div class="form-control">
-                        <input type="text" name="discription" id="postDiscription" placeholder="Description of item" required>
+                        <input type="text" name="discription" id="postDiscription" placeholder="Discription" required>
                     </div>
                     <div class="form-control">
-                        <!-- <input type="email" name="email" placeholder="Email" required> -->
-                        <select name="OC" id="postType">
+                        <select name="type" id="postType" required>
                             <option value="type">----type----</option>
-                            <option value="container">Container</option>
                             <option value="object">Object</option>
+                            <option value="container">Container</option>
                         </select>
                     </div>
-                    <input type="submit" value="Send" class="btn btn-primary" onclick="onPostSubmit()">
-                </form>
+                    <input type="submit"  onClick="onPostSubmit()" class="btn btn-primary">
             </div>
         </div>
+        
     </section>
+    <button id="fixedbutton" type="button" onclick="myFunction()" class="button" ><i class="bi bi-house-add-fill" style="font-size: 30px;"></i></button>
 
-    <!-- Stats
+    <!-- Stats -->
     <section class="stats">
         <div class="container">
             <h3 class="stats-heading text-center my-1">
-                All your existing items:
+                
             </h3>
 
             <div class="grid grid-3 text-center my-4">
-                <div>
+                <!-- <div>
                     <i class="fas fa-server fa-3x"></i>
                     <h3>10,349,405</h3>
                     <p class="text-secondary">Deployments</p>
@@ -76,31 +74,14 @@
                     <i class="fas fa-project-diagram fa-3x"></i>
                     <h3>2,343,265</h3>
                     <p class="text-secondary">Projects</p>
-                </div> 
-            <div class="showcase-form card">
-                <h2>Add an item</h2>
-                 <form>
-                    <div class="form-control">
-                        <input type="text" name="name" placeholder="Name of item" required>
-                    </div>
-                    <div class="form-control">
-                        <input type="text" name="discription" placeholder="Discription" required>
-                    </div>
-                    <div class="form-control">
-                        <input type="email" name="email" placeholder="Email" required> 
-                        <select name="OC" id="">
-                            <option value="type">----type----</option>
-                            <option value="container">Container</option>
-                            <option value="object">Object</option>
-                        </select>
-                    </div>-->
-
+                </div> -->
+                
             </div>
         </div>
     </section>
 
     <!-- Cli -->
-    <!--<section class="cli">
+    <!-- <section class="cli">
         <div class="container grid">
             <img src="https://raw.githubusercontent.com/bradtraversy/loruki-website/master/images/cli.png" alt="">
             <div class="card">
@@ -110,10 +91,10 @@
                 <h3>Deploy in seconds</h3>
             </div>
         </div>
-    </section>
+    </section> -->
 
-    Cloud 
-    <section class="cloud bg-primary my-2 py-2">
+    <!-- Cloud -->
+    <!-- <section class="cloud bg-primary my-2 py-2">
         <div class="container grid">
             <div class="text-center">
                 <h2 class="lg">Extreme Cloud Hosting</h2>
@@ -125,7 +106,7 @@
     </section> -->
 
     <!-- Languages -->
-    <!--<section class="languages">
+    <!-- <section class="languages">
         <h2 class="md text-center my-2">
             Supported Languages
         </h2>
@@ -183,6 +164,9 @@
                 <a href="#"><i class="fab fa-twitter fa-2x"></i></a>
             </div>
         </div>
-    </footer>
+    </footer> -->
+    <script>
+        src="newuibase.js"
+    </script>
 </body>
-</html> -->
+</html>
