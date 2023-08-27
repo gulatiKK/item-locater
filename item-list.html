@@ -7,14 +7,30 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <title>Document</title>
 </head>
-<body style="background-color:#4d94ff;"></body>
+<body style="background-color:#123;"></body>
 
 <body>
-   
+    <div class="navbar">
+        <div class="container flex">
+
+            <i class="bi bi-amd"  style="font-size: 44px;"></i>
+            <h1 style="color: antiquewhite;" class="logo">The Item Locater!</h1>
+            <nav>
+                <ul>
+                    <li><a href="item-list.html">All Items</a></li>
+                    <li><a href="newuibase.html">Home</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+    <div id="tileInfo">
+        <div class="tile">
+            <h2 name="name" id="TileName">name</h2>
+            <p for="TileDiscription" id="TileDescription">Description for Tile.</p>
+          </div>
+    </div>
     <div id="editWindow" method="POST">
         <div class="form-group">
-            <button href="http://localhost:7800/api/item-list.html" class="cancel-button">Cancel</button>
-            <br>
             <label for="name">name</label>
             <input class="form-control" name="name" id="edt_name">
         </div>
@@ -31,7 +47,7 @@
                 <option value="object">object</option>
             </select>
         </div>
-        <button style="font-size: 18px" type="submit" class="btn btn-outline-dark" onClick="onEditSubmit()">Submit</button>
+        <button style="font-size: 18px" type="submit" class="btn btn-primary" onClick="onEditSubmit()">Submit</button>
     </div>
     
     <div id="relationWindow" method="POST">
@@ -50,6 +66,7 @@
     </div>
 
     <div id="addWindow">
+        
         <div class="form-group">
             <label for="name">Name</label>
             <input type="string"class="form-control" name="name" id="postName">
@@ -70,21 +87,17 @@
         </div>
             <br>
             <button type="submit" class="btn btn-primary" onClick="onPostSubmit()">Submit</button>
-    </div>
-
+            
+</div>
 
     <div class="container" id="listWindow">
-        <hr>
-        <h1>List of Items</h1>
+        <!-- <hr>
+        <h1 style="color: antiquewhite;">List of Items</h1>
         <form>
-            <button style="font-size: 20px"  type="button"class="btn btn-outline-dark" onClick="setPostModal()"><i class="bi bi-house-add"></i> ADD</button>
+            <button style="font-size: 20px"  type="button"class="btn btn-outline-light" onClick="setPostModal()"><i class="bi bi-house-add"></i> ADD</button>
          </form>&nbsp;
-
-         <form>
-            <button style="font-size: 18px" type="submit" class="btn btn-outline-dark"><i onClick="setRelationModal()" class="bi bi-link-45deg"></i> Link</button>
-         </form>
-
-        <hr>
+        <hr> -->
+        &nbsp;
         <div>
             <div class="mb-3">
                 <div class="input-group">
@@ -102,5 +115,8 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <script src="item-list.js"></script>
+    <link rel="stylesheet" href="item-list.css">
+    <button id="fixedbutton" type="button" onclick="setPostModal()" class="btn btn-secondary" ><i class="bi bi-plus-circle-fill" style="font-size: 30px;"></i></button>
+
 </body>
 </html>
