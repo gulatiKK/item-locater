@@ -1,4 +1,5 @@
 var currentItem = "";
+var servername = "http://192.168.1.126:3000"
 const setPostModal = () => {
     document.getElementById('addWindow').style.display = "block";
     document.getElementById('listWindow').style.display = "none";
@@ -26,7 +27,7 @@ const onPostSubmit = () => {
     
     
       let xhr = new XMLHttpRequest();
-      xhr.open("POST", "http://localhost:7800/api/item");
+      xhr.open("POST", servername + "/api/item");
       xhr.setRequestHeader("Accept", "application/json");
       xhr.setRequestHeader("Content-Type", "application/json");
     
@@ -58,7 +59,7 @@ const onPostSubmit = () => {
         
         
           let xhr = new XMLHttpRequest();
-          xhr.open("POST", "http://localhost:7800/api/relation");
+          xhr.open("POST", servername + "/api/relation");
           xhr.setRequestHeader("Accept", "application/json");
           xhr.setRequestHeader("Content-Type", "application/json");
         
@@ -95,7 +96,7 @@ const onEditSubmit = () => {
 
 
   let xhr = new XMLHttpRequest();
-  xhr.open("POST", "http://localhost:7800/api/update/" + currentItem);
+  xhr.open("POST", servername+"/api/update/" + currentItem);
   xhr.setRequestHeader("Accept", "application/json");
   xhr.setRequestHeader("Content-Type", "application/json");
 
@@ -122,7 +123,7 @@ const setEditModal = (id) => {
     document.getElementById('editWindow').style.display = "block";
     // Get information about the book using isbn
     const xhttp = new XMLHttpRequest();
-    xhttp.open("GET", `http://localhost:7800/api/getOne/${id}`, false);
+    xhttp.open("GET", servername+`/api/getOne/${id}`, false);
     xhttp.send();
 
     const book = JSON.parse(xhttp.responseText);
@@ -155,7 +156,7 @@ const setEditRelation = (id) => {
     // everytime to add a new a reation call api to get all relations and set allRelations
     // when you are showing items, get the container value from allRelations and show
 
-    xhttp.open("GET", `http://localhost:7800/api/oneRelation/${id}`, false);
+    xhttp.open("GET", `http://localhost:3000/api/oneRelation/${id}`, false);
     xhttp.send();
 
     const relation = JSON.parse(xhttp.responseText);
@@ -173,15 +174,9 @@ const setEditRelation = (id) => {
 
 const deleteBook = (id) => {
     const xhttp = new XMLHttpRequest();
-    if(confirm(`Are you sure you want to delete ${name}?`) == true){
-      xhttp.open("DELETE", `http://localhost:7800/api/delete/${id}`, false);
-      xhttp.send();
-    }
-    
-    else{
-      
-    }
 
+    xhttp.open("DELETE", servername+`/api/delete/${id}`, false);
+    xhttp.send();
 
     // Reloading the page
     location.reload();
@@ -192,7 +187,7 @@ let books = []; // Declare the books array
 const loadBooks = () => {
     const xhttp = new XMLHttpRequest();
 
-    xhttp.open("GET", "http://localhost:7800/api/getAll", false);
+    xhttp.open("GET", servername +"/api/getAll", false);
     xhttp.send();
 
     books = JSON.parse(xhttp.responseText); // Store the books in the 'books' array
@@ -207,7 +202,7 @@ const loadRelations = () => {
     const xhttp = new XMLHttpRequest();
     testvar = "pqr";
 
-    xhttp.open("GET", "http://localhost:7800/api/allRelation", false);
+    xhttp.open("GET", servername +"/api/allRelation", false);
     xhttp.send();
 
     relations = JSON.parse(xhttp.responseText); // Store the books in the 'books' array
@@ -237,56 +232,95 @@ document.addEventListener('DOMContentLoaded', () => {
     searchButton.addEventListener('click', handleSearch);
 });
 
+const disp_getIcon = (item_type) => {
+  icon_type = ``
+    if (item_type == 'container')
+  {
+    icon_type = `<i class="bi bi-box-seam"></i>`
+  } 
+  return (icon_type)
+}
+
+const disp_getContainer = (item_name) => {
+  let container_name = "not set";
+  for ( let rel of relations)
+  {
+          if ( item_name == rel.item_name)
+          {
+              container_name = rel.container_name;
+          }
+  }
+  return(container_name)
+
+}
+
+const tileInfo = (item_name) => {
+  let container_name = "not set";
+  let object_name = "not set";
+  getElementById('ObName').value = item_name
+
+  console.log(getElementById('ObName'))
+  for ( let rel of relations)
+  {
+      if(item_name == rel.item_name){
+          container_name = rel.container_name;
+          
+      }
+      else if(item_name == rel.container_name){
+          object_name = rel.item_name
+      }
+  }
+  console.log(item_name)
+}
+
 const displayBooks = (books) => {
+  
     const booksContainer = document.getElementById('books');
     booksContainer.innerHTML = '';
     
     console.log(testvar);
     for (let book of books) {
 
-    let container_name = "not set";
+      let container_name = disp_getContainer(book.name)
+      icon_type = disp_getIcon(book.type)
+      // let item = send_tileInfo(book.name)
+      // console.log(item)
+      //let related_objects = disp_related_objects(book.name)
 
-    for ( let rel of relations)
-    {
-            if ( book.name == rel.item_name)
-            {
-                container_name = rel.container_name;
-            }
-    }
+      const x = `
+          <div class="col-4">
+              <div class="card">
+                  <div class="card-body">
+                      <h3 onclick="tileInfo('${book.name}')" type="button" class="card-title" style="text-transform: capitalize;"><b>${icon_type} ${book.name}</b></h3>
+                      <h6 class="card-title"></h6>
+                      <h7 style="
+                      display:inline-block;
+                      white-space: nowrap;
+                      overflow: hidden;
+                      text-overflow: ellipsis;
+                      max-width: 23ch;" class="card-subtitle mb-2 text-muted">${book.discription}</h6>&nbsp;
+                      &nbsp;
+                      <h6 class="card-subtitle mb-2 text-muted"><b>Conatiner: ${container_name}</b></h6>
+                      
+                    
+                      <hr>
+                      <div class="btn-group" role="group">
+                          <button type="button" style="font-size: 18px" class="btn btn-danger btn btn-success btn-lg" onClick="deleteBook('${book._id}')"><i class="bi bi-trash"></i> </button>&nbsp;
+                          <button type="button" style="font-size: 18px" class="btn btn-primary btn-lg" onClick="setEditModal('${book._id}')"> <i class="bi bi-pencil-square"></i> </button>&nbsp;
+                      </div>
 
-        const x = `
-            <div class="col-4">
-                <div class="card">
-                    <div class="card-body">
-                        <h3 class="card-title" style="text-transform: capitalize;"><b>${book.name}</b></h3>
-                        <h6 class="card-title"></h5>
-                        <h7 class="card-subtitle mb-2 text-muted">${book.discription}</h6>
-                        <div>type: ${book.type}</div>
-                        <hr>
-                        <div class="btn-group" role="group">
-                        
-                            <button type="button" style="font-size: 18px" class="btn btn-danger" onClick="deleteBook('${book._id}')"><i class="bi bi-trash"></i> </button>&nbsp;  
-                            <button type="button" style="font-size: 18px" class="btn btn-primary" data-toggle="modal" data-target="#editBookModal" onClick="setEditModal('${book._id}')"><i class="bi bi-pencil-square"></i> </button>&nbsp;
-
-                            <span style = "background-color: #4dff4d"> <mark> <b>Stored In: ${container_name}</b> </mark> </span>
-                            
-                            
-                        </div>
-
-                        
-                    </div>
-                </div>
-            </div>
-            
-        `;
-
+                      
+                  </div>
+              </div>
+          </div>
+      `;
         booksContainer.innerHTML += x;
     }
 }
 
 document.getElementById('editWindow').style.display = "none";
 document.getElementById('addWindow').style.display = "none";
- document.getElementById('relationWindow').style.display = "none";
+document.getElementById('relationWindow').style.display = "none";
  
 loadRelations();
 loadBooks();
