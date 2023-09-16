@@ -10,6 +10,7 @@
 <body style="background-color:#123;"></body>
 
 <body>
+    
     <div class="navbar">
         <div class="container flex">
 
@@ -24,10 +25,20 @@
         </div>
     </div>
     <div id="tileInfo">
+    <button id="fixedbutton2" type="button" onclick="TileModal()" class="button"><i class="bi bi-house-door" style="font-size: 30px;"></i></button>
+    <button id="fixedbutton3" type="button" class="button2"><i class="bi bi-trash" style="font-size: 30px;"></i></button>
+    <button id="fixedbutton4" type="button" onclick="TileModal()" class="button3"><i class="bi bi-pencil-square" style="font-size: 30px;"></i></button>
         <div class="tile">
-            <h2 name="name" id="TileName">name</h2>
-            <p for="TileDiscription" id="TileDescription">Description for Tile.</p>
+            <h2 name="name" style="text-transform: capitalize; color: antiquewhite;" id="TileName">Title</h2>
+            <p style="color: antiquewhite;" for="TileDiscription" id="TileDescription">Description for Tile.</p>
           </div>
+          <div class="tile2">
+            <h2 name="name" style="text-transform: capitalize; color: antiquewhite;">Container:</h2>
+            <button class="btn btn-link" id="ConName"><p style="color: antiquewhite;">Container Name</p></button>
+          </div>
+          <h3 style="color: antiquewhite;">--Related Objects and Containers:</h3>
+        <div class="objectTiles" id="TileBar">
+        </div>
     </div>
     <div id="editWindow" method="POST">
         <div class="form-group">
@@ -117,6 +128,5 @@
     <script src="item-list.js"></script>
     <link rel="stylesheet" href="item-list.css">
     <button id="fixedbutton" type="button" onclick="setPostModal()" class="btn btn-secondary" ><i class="bi bi-plus-circle-fill" style="font-size: 30px;"></i></button>
-
 </body>
 </html>
