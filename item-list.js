@@ -1,4 +1,5 @@
 var currentItem = "";
+let ConName = "";
 var servername = "http://192.168.1.126:3000"
 const setPostModal = () => {
     document.getElementById('addWindow').style.display = "block";
@@ -8,6 +9,11 @@ const setPostModal = () => {
 const setRelationModal = () => {
     document.getElementById('relationWindow').style.display = "block";
     document.getElementById('listWindow').style.display = "none";
+}
+
+const setTileModal = () => {
+  document.getElementById('tileInfo').style.display = "block";
+  document.getElementById('listWindow').style.display = "none";
 }
 
 const onPostSubmit = () => {
@@ -120,6 +126,7 @@ const onEditSubmit = () => {
 
 const setEditModal = (id) => {
     currentItem = id;
+    document.getElementById('tileInfo').style.display = "none";
     document.getElementById('editWindow').style.display = "block";
     // Get information about the book using isbn
     const xhttp = new XMLHttpRequest();
@@ -254,23 +261,105 @@ const disp_getContainer = (item_name) => {
 
 }
 
-const tileInfo = (item_name) => {
-  let container_name = "not set";
-  let object_name = "not set";
-  getElementById('ObName').value = item_name
-
-  console.log(getElementById('ObName'))
-  for ( let rel of relations)
+const ConTile = (Name) => {
+for(let book of books)
+{
+  if(Name == book.name)
   {
-      if(item_name == rel.item_name){
-          container_name = rel.container_name;
-          
-      }
-      else if(item_name == rel.container_name){
-          object_name = rel.item_name
-      }
+    tileInfo(book._id)
   }
-  console.log(item_name)
+}
+}
+
+const TileModal = () => {
+    location.reload();
+}
+
+const tileInfo = (id) => {
+  document.getElementById('fixedbutton2').style.display = "block";
+  document.getElementById('fixedbutton3').style.display = "block";
+  document.getElementById('fixedbutton4').style.display = "block";
+  let container_name = "not set";
+  let objects = [];
+    currentItem = id;
+    document.getElementById('tileInfo').style.display = "block";
+    document.getElementById('listWindow').style.display = "none";
+    // Get information about the book using isbn
+    const xhttp = new XMLHttpRequest();
+    xhttp.open("GET", servername+`/api/getOne/${id}`, false);
+    xhttp.send();
+
+    const book = JSON.parse(xhttp.responseText);
+    const {
+        name,
+        discription,
+        type
+    } = book;
+    for ( let rel of relations)
+    {
+        if(name == rel.item_name){
+          container_name = rel.container_name; 
+        }
+        if(name == rel.container_name){
+          objects.push(rel.item_name)
+          console.log(objects[0])
+        }
+    }
+    document.getElementById('ConName').innerHTML = container_name;  
+    document.getElementById('TileName').innerHTML = name;
+    document.getElementById('TileDescription').innerHTML = discription;
+    const TileBar = document.getElementById('TileBar');
+    TileBar.innerHTML='';
+    for(rel of relations){
+      if(name == rel.container_name)
+      {
+        const x = `<div class="tile3">
+                  <h2 name="name" style="text-transform: capitalize; color: antiquewhite;">${rel.item_name}</h2>
+                  <p style="color: antiquewhite;">Description for Tile.</p>
+                 </div>`;
+                 TileBar.innerHTML += x;
+      }
+      if(name == rel.item_name)
+      {
+        for(rel2 of relations)
+        {
+          if(rel.container_name == rel2.container_name)
+          {
+            if(rel2.item_name != name)
+            {
+              const x = `<div class="tile3">
+              <h2 name="name" style="text-transform: capitalize; color: antiquewhite;">${rel2.item_name}</h2>
+              <p style="color: antiquewhite;">Description for Tile.</p>
+             </div>`;
+             TileBar.innerHTML += x;
+            }
+            
+          }
+        }
+      }
+    }
+    if(container_name != "not set")
+    {
+    document.getElementById('ConName').onclick = function() {
+      ConTile(container_name);
+   };
+  }
+  document.getElementById('fixedbutton3').onclick = function() {
+    for(let book of books)
+    {
+      if(name == book.name){
+        deleteBook(book._id);
+      }
+    }
+ };
+ document.getElementById('fixedbutton4').onclick = function() {
+  for(let book of books)
+  {
+    if(name == book.name){
+      setEditModal(book._id)
+    }
+  }
+};
 }
 
 const displayBooks = (books) => {
@@ -291,7 +380,7 @@ const displayBooks = (books) => {
           <div class="col-4">
               <div class="card">
                   <div class="card-body">
-                      <h3 onclick="tileInfo('${book.name}')" type="button" class="card-title" style="text-transform: capitalize;"><b>${icon_type} ${book.name}</b></h3>
+                      <h3 onclick="tileInfo('${book._id}')" type="button" class="card-title" style="text-transform: capitalize;"><b>${icon_type} ${book.name}</b></h3>
                       <h6 class="card-title"></h6>
                       <h7 style="
                       display:inline-block;
@@ -321,7 +410,7 @@ const displayBooks = (books) => {
 document.getElementById('editWindow').style.display = "none";
 document.getElementById('addWindow').style.display = "none";
 document.getElementById('relationWindow').style.display = "none";
- 
+document.getElementById('tileInfo').style.display = "none";
 loadRelations();
 loadBooks();
 
