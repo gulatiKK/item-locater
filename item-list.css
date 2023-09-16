@@ -68,10 +68,10 @@
 
 
 .tile {
-  border: 1px solid #ccc;
-  background-color: white;
+  border: 1px solid antiquewhite;
+  border-width: 10px;
+  background-color: black;
   padding: 20px;
-  text-align: center;
   margin: 10px;
   box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
   height: 450px;
@@ -85,6 +85,63 @@
 }
 
 .tile p {
+  margin-top: 5px;
+}
+
+
+.tile2 {
+  border: 1px solid antiquewhite;
+  border-width: 10px;
+  background-color: rgb(36, 36, 128);
+  padding: 20px;
+  margin: 10px;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+  height: 170px;
+  width: 220px;
+  position: absolute;
+  top: 350px;
+  left: 380px;
+  text-align: center;
+}
+
+
+.tile2 h2 {
+  font-size: medium;
+  margin-top: 35px;
+}
+
+.tile2 p {
+  font-size: small;
+  margin-top: 5px;
+}
+
+.objectTiles {
+  width: 1400px;
+  font-size: 0;
+  margin: 0 auto;
+}
+.tile3 {
+  display: inline-block;
+  border: 1px solid antiquewhite;
+  border-width: 10px;
+  background-color: rgb(36, 36, 128);
+  padding: 20px;
+  margin: 40px 10px 10px 10px;
+  height: 150px;
+  width: 200px;
+  top: 600px;
+  left: 1px;
+  text-align: center;
+}
+
+
+.tile3 h2 {
+  font-size: medium;
+  margin-top: 25px;
+}
+
+.tile3 p {
+  font-size: small;
   margin-top: 5px;
 }
 
@@ -118,6 +175,27 @@
       height:75px;
       width:75px;
   }
+  #fixedbutton2 {
+    position: fixed;
+    bottom: 110px;
+    right: 18px; 
+    height:150px;
+    width:75px;
+}
+#fixedbutton3 {
+  position: fixed;
+  bottom: 280px;
+  right: 18px; 
+  height:150px;
+  width:75px;
+}
+#fixedbutton4 {
+  position: fixed;
+  bottom: 450px;
+  right: 18px; 
+  height:150px;
+  width:75px;
+}
   .button {
       border-color: #04AA6D;
       color: green;
@@ -134,6 +212,38 @@
      background-color: green;
      color:white;
   }
+  .button2 {
+    border-color: #ff1a1a;
+    color: #ff1a1a;
+    
+    padding: 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    border-radius: 12px;
+  }
+  .button2:hover {
+   background-color: #ff1a1a;
+   color:white;
+}
+.button3 {
+  border-color: #3366ff;
+  color: #3366ff;
+  
+  padding: 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  border-radius: 12px;
+}
+.button3:hover {
+ background-color: #3366ff;
+ color:white;
+}
   .showcase {
     height: 400px;
     background-color: var(--primary-color);
@@ -201,6 +311,3 @@
     -moz-transform: skewY(-3deg);
     -ms-transform: skewY(-3deg);
   }
-  
-
-  
