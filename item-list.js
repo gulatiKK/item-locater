@@ -313,11 +313,16 @@ const tileInfo = (id) => {
     for(rel of relations){
       if(name == rel.container_name)
       {
-        const x = `<div class="tile3">
-                  <h2 name="name" style="text-transform: capitalize; color: antiquewhite;">${rel.item_name}</h2>
-                  <p style="color: antiquewhite;">Description for Tile.</p>
+        for(let book3 of books){
+          if(rel.item_name == book3.name){
+            const x = `<div class="tile3">
+                  <button class="btn btn-link" onClick="tileInfo('${book3._id}')" id="sub-tile"name="name" style="text-transform: capitalize; color: antiquewhite;">${rel.item_name}</button>
+                  <p style="color: antiquewhite;">${book3.discription}</p>
                  </div>`;
                  TileBar.innerHTML += x;
+          }
+        }
+        
       }
       if(name == rel.item_name)
       {
@@ -327,11 +332,17 @@ const tileInfo = (id) => {
           {
             if(rel2.item_name != name)
             {
-              const x = `<div class="tile3">
-              <h2 name="name" style="text-transform: capitalize; color: antiquewhite;">${rel2.item_name}</h2>
-              <p style="color: antiquewhite;">Description for Tile.</p>
+              
+              for(let book2 of books){
+                if(rel2.item_name == book2.name)
+                {
+                  const x = `<div class="tile3">
+              <button class="btn btn-link" onClick="tileInfo('${book2._id}')"id="sub-tile" name="name" style="text-transform: capitalize; color: antiquewhite;">${rel2.item_name}</button>
+              <p style="color: antiquewhite;">${book2.discription}</p>
              </div>`;
              TileBar.innerHTML += x;
+                }
+              }
             }
             
           }
