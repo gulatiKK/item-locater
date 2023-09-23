@@ -30,35 +30,15 @@
     <button id="fixedbutton4" type="button" onclick="TileModal()" class="button3"><i class="bi bi-pencil-square" style="font-size: 30px;"></i></button>
         <div class="tile">
             <h2 name="name" style="text-transform: capitalize; color: antiquewhite;" id="TileName">Title</h2>
-            <p style="color: antiquewhite;" for="TileDiscription" id="TileDescription">Description for Tile.</p>
+            <p style="color: antiquewhite; max-width: 100ch; overflow: auto; max-height: 6.5ch;" for="TileDiscription" id="TileDescription" >Description for Tile.</p>
           </div>
           <div class="tile2">
             <h2 name="name" style="text-transform: capitalize; color: antiquewhite;">Container:</h2>
             <button class="btn btn-link" id="ConName"><p style="color: antiquewhite;">Container Name</p></button>
           </div>
-          <h3 style="color: antiquewhite;">--Related Objects and Containers:</h3>
+          &nbsp;<h3 style="color: antiquewhite;">--Related Objects and Containers:--</h3>
         <div class="objectTiles" id="TileBar">
         </div>
-    </div>
-    <div id="editWindow" method="POST">
-        <div class="form-group">
-            <label for="name">name</label>
-            <input class="form-control" name="name" id="edt_name">
-        </div>
-
-        <div class="form-group">
-            <label for="discription">discription</label>
-            <input type="string"class="form-control" name="discription" id="edt_discription">
-        </div>
-
-        <div class="form-group">
-            <label for="type">type</label>
-            <select class="form-control" name="type" id="edt_type">
-                <option value="container">container</option>
-                <option value="object">object</option>
-            </select>
-        </div>
-        <button style="font-size: 18px" type="submit" class="btn btn-primary" onClick="onEditSubmit()">Submit</button>
     </div>
     
     <div id="relationWindow" method="POST">
@@ -75,31 +55,44 @@
     <br>
     <button type="submit" class="btn btn-primary" onClick="onRelationSubmit()">Submit</button>
     </div>
-
-    <div id="addWindow">
-        
-        <div class="form-group">
-            <label for="name">Name</label>
-            <input type="string"class="form-control" name="name" id="postName">
-        </div>
-
-        <div class="form-group">
-            <label for="discription">Description</label>
-            <input type="string" class="form-control" name="discription" id="postDiscription">
-        </div>
-
-        <div class="form-group">
-            <label for="type">Type</label>
-            <select class="form-control" name="type" id="postType">
-                <option value="">----type----</option>
-                <option value="object">Object</option>
-                <option value="container">Container</option>
-            </select>
-        </div>
-            <br>
-            <button type="submit" class="btn btn-primary" onClick="onPostSubmit()">Submit</button>
-            
+    
+    <section class="showcase">
+        <div class="container grid">
+            <div class="showcase-form card" id="editWindow">
+                <h2>Edit an item</h2>
+                    <div class="form-control">
+                        <input type="text" name="name" id="edt_name" placeholder="Name of item" required>
+                    </div>
+                    <div class="form-control">
+                        <input type="text" name="discription" id="edt_discription" placeholder="Discription" required>
+                    </div>
+                    <div class="form-control">
+                        <select name="type" id="edt_type" required>
+                            <option value="object">Object</option>
+                            <option value="container">Container</option>
+                        </select>
+                    </div>
+                    <input type="submit"  onClick="onEditSubmit()" class="btn btn-primary">
+            </div>
+    <div class="showcase-form card" id="addWindow">
+        <h2>Add an item</h2>
+            <div class="form-control">
+                <input type="text" name="name" id="postName" placeholder="Name of item" required>
+            </div>
+            <div class="form-control">
+                <input type="text" name="discription" id="postDiscription" placeholder="Discription" required>
+            </div>
+            <div class="form-control">
+                <select name="type" id="postType" required>
+                    <option value="type">----type----</option>
+                    <option value="object">Object</option>
+                    <option value="container">Container</option>
+                </select>
+            </div>
+            <input type="submit"  onClick="onPostSubmit()" class="btn btn-primary">
+    </div>
 </div>
+</section>
 
     <div class="container" id="listWindow">
         <!-- <hr>
