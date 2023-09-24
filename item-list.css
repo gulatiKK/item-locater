@@ -317,3 +317,8 @@
   padding: 20px;
   margin: 10px;
 }
+#relation-window {
+  position: absolute;
+  top: 100px;
+  left: 760px;
+}
