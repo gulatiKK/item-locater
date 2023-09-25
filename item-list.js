@@ -1,6 +1,6 @@
 var currentItem = "";
 let ConName = "";
-var servername = "http://192.168.1.126:3000"
+var servername = "http://192.168.1.102:7800"
 const setPostModal = () => {
     document.getElementById('addWindow').style.display = "block";
     document.getElementById('listWindow').style.display = "none";
@@ -14,6 +14,10 @@ const setRelationModal = () => {
 const setTileModal = () => {
   document.getElementById('tileInfo').style.display = "block";
   document.getElementById('listWindow').style.display = "none";
+}
+
+function backToItemlist(){
+  window.location="http://127.0.0.1:5500/item-list.html"
 }
 
 const onPostSubmit = () => {
@@ -260,6 +264,7 @@ const disp_getContainer = (item_name) => {
   return(container_name)
 
 }
+
 const ConTile = (Name) => {
 for(let book of books)
 {
@@ -274,8 +279,9 @@ const TileModal = () => {
     location.reload();
 }
 
+  document.getElementById('selection-drop')
+
 const tileInfo = (id) => {
-  document.getElementById('relation-window').style.display = "block";
   document.getElementById('fixedbutton2').style.display = "block";
   document.getElementById('fixedbutton3').style.display = "block";
   document.getElementById('fixedbutton4').style.display = "block";
@@ -313,16 +319,11 @@ const tileInfo = (id) => {
     for(rel of relations){
       if(name == rel.container_name)
       {
-        for(let book3 of books){
-          if(rel.item_name == book3.name){
-            const x = `<div class="tile3">
-                  <button class="btn btn-link" onClick="tileInfo('${book3._id}')" id="sub-tile"name="name" style="text-transform: capitalize; color: antiquewhite;">${rel.item_name}</button>
-                  <p style="color: antiquewhite;">${book3.discription}</p>
+        const x = `<div class="tile3">
+                  <h2 name="name" style="text-transform: capitalize; color: antiquewhite;">${rel.item_name}</h2>
+                  <p style="color: antiquewhite;">Description for Tile.</p>
                  </div>`;
                  TileBar.innerHTML += x;
-          }
-        }
-        
       }
       if(name == rel.item_name)
       {
@@ -332,17 +333,11 @@ const tileInfo = (id) => {
           {
             if(rel2.item_name != name)
             {
-              
-              for(let book2 of books){
-                if(rel2.item_name == book2.name)
-                {
-                  const x = `<div class="tile3">
-              <button class="btn btn-link" onClick="tileInfo('${book2._id}')"id="sub-tile" name="name" style="text-transform: capitalize; color: antiquewhite;">${rel2.item_name}</button>
-              <p style="color: antiquewhite;">${book2.discription}</p>
+              const x = `<div class="tile3">
+              <h2 name="name" style="text-transform: capitalize; color: antiquewhite;">${rel2.item_name}</h2>
+              <p style="color: antiquewhite;">Description for Tile.</p>
              </div>`;
              TileBar.innerHTML += x;
-                }
-              }
             }
             
           }
@@ -417,101 +412,13 @@ const displayBooks = (books) => {
         booksContainer.innerHTML += x;
     }
 }
-function loadContainersInSelectBox() {
-  const containerSelector = document.getElementById("container_selector");
-  const apiUrl = servername+"/api/getAll?type=container";
-  if (apiUrl) {
-      fetch(apiUrl)
-          .then(response => response.json())
-          .then(data => {
-              for (let i = 0; i < data.length; i++) {
-                  const opt = document.createElement("option");
-                  opt.value = data[i].name;
-                  opt.innerHTML = data[i].name;
-                  containerSelector.appendChild(opt);
-              }
-              containerSelector.addEventListener("change", function() {
-                  const index = containerSelector.selectedIndex;
-                  const containerInfo = document.getElementById("container_info");
-                  containerInfo.innerHTML = `
-                      <p>Name: ${data[index].name}</p>
-                      <p>Description: ${data[index].discription}</p>
-                      <p>Type: ${data[index].type}</p>
-                  `;
-              });
-          })
-          .catch(error => console.error(error));
-  }
-}
 
-function loadObjectsInSelectBox() {
-  const objectSelector = document.getElementById("object_selector");
-  const apiUrl = servername+"/api/getAll?type=object";
-  if (apiUrl) {
-      fetch(apiUrl)
-          .then(response => response.json())
-          .then(data => {
-              for (let i = 0; i < data.length; i++) {
-                  const opt = document.createElement("option");
-                  opt.value = data[i].name;
-                  opt.innerHTML = data[i].name;
-                  objectSelector.appendChild(opt);
-              }
-              objectSelector.addEventListener("change", function() {
-                  const index = objectSelector.selectedIndex;
-                  const objectInfo = document.getElementById("object_info");
-                  objectInfo.innerHTML = `
-                      <p>Name: ${data[index].name}</p>
-                      <p>Description: ${data[index].discription}</p>
-                      <p>Type: ${data[index].type}</p>
-                  `;
-              });
-          })
-          .catch(error => console.error(error));
-  }
-}
-
-function submitData() {
-  const submitButton = document.getElementById("submit_button");
-  const objectSelector = document.getElementById("object_selector");
-  const containerSelector = document.getElementById("container_selector");
-
-  submitButton.addEventListener("click", function() {
-      const selectedObject = objectSelector.value;
-      const selectedContainer = containerSelector.value;
-
-      const apiUrl = servername+"/api/relation";
-      const requestBody = {
-          item_name: selectedObject,
-          container_name: selectedContainer
-      };
-      
-
-      fetch(apiUrl, {
-          method: "POST",
-          headers: {
-              "Content-Type": "application/json"
-          },
-          body: JSON.stringify(requestBody)
-      })
-      .then(response => response.json())
-      .then(data => {
-          console.log("Data saved successfully:", data);
-          // Perform any further actions after data is saved
-      })
-      .catch(error => console.error("Error saving data:", error));
-  });
-}
 document.getElementById('editWindow').style.display = "none";
-document.getElementById('relation-window').style.display = "none";
 document.getElementById('addWindow').style.display = "none";
 document.getElementById('relationWindow').style.display = "none";
 document.getElementById('tileInfo').style.display = "none";
 loadRelations();
 loadBooks();
-loadObjectsInSelectBox();
-loadContainersInSelectBox();
-submitData();
 
 // Add event listener for search input
 const searchInput = document.getElementById('searchInput');
