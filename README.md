@@ -14,5 +14,4 @@ Before you run the code follow this checklist
 1. Be sure to change you ip address in the itemlist.js file, you will find it at the very top
 1. Enter this cmd in terminal, $ npm i express mongoose nodemon dotenv
 1. Us the connectMe.js file to connect the mongoDB repository to you computer
-That's it from our readme page and we hope you have a great experince
-Thankyou
+1. That's it from our readme page and we hope you have a great experince, Thankyou
