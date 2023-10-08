@@ -9,6 +9,6 @@ This button will take you to a page with the list of item you have saved and wit
 You may add as many item as you see fit and even pair them with our relation ui,
 as you will discover each item and container can be stored in another container.
 For example:
-You would like to save your item 'shoes' to the container 'cupboard' you will simply relate these two and they the cupboard will show as the container of shoes until you wish to change the location or delete the item.
+You would like to save your item 'shoes' to the container 'cupboard' you will simply relate these two and them the cupboard will show as the container of shoes until you wish to change the location or delete the item.
 That's it from our readme page and we hope you have a great experince
 Thankyou
