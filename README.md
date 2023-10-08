@@ -1,6 +1,6 @@
 # item-locater
 The item locater asists you in the daily ongoings of your life
-You may use this web application developed by @gulatiKK and @AkshatGupta2009 to apply to your daily life or just for experimental use
+You may use this web application developed by @gulatiKK and @AkshatGupta2009 to apply to your daily life or just for experimental use.
 Our application allows you to save house items and containers in an ordered repository,
 the easy-to-use ui provides you with a clean and interactive experience.
 All you have to do is open the file 'newuibase.html' and add you first item,
