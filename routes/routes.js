@@ -1,6 +1,7 @@
 const express = require('express');
 const Model = require('../model/model');
 const Relation = require('../model/relation');
+const Log = require('../model/log');
 const router = express.Router()
 
 
@@ -19,6 +20,21 @@ router.post('/relation', async (req, res) => {
         res.status(400).json({message: error.message})
     }
 })
+router.post('/log', async (req, res) => {
+    const data = new Log({
+        userName: req.body.userName,
+        password: req.body.password
+    })
+
+    try {
+        const dataToSave = await data.save();
+        res.status(200).json(dataToSave)
+    }
+    catch (error) {
+        res.status(400).json({message: error.message})
+    }
+})
+
 //router.post('/relation', async (req, res) => {
 //     const { item_name, container_name } = req.body;
   
@@ -60,10 +76,31 @@ router.get('/allRelation', async (req, res) => {
     }
 
 })
+router.get('/allLog', async (req, res) => {
+    // get the parameters supplied with the call
+    try{
+        const data = await Log.find();
+        res.json(data)
+    }
+    catch(error){
+        res.status(500).json({message: error.message})
+    }
+
+})
 
 router.get('/oneRelation/:id', async (req, res) => {
     try{
         const data = await Relation.findById(req.params.id);
+        res.json(data)
+    }
+    catch(error){
+        res.status(500).json({message: error.message})
+    }
+})
+
+router.get('/oneLog/:id', async (req, res) => {
+    try{
+        const data = await Log.findById(req.params.id);
         res.json(data)
     }
     catch(error){
@@ -76,7 +113,8 @@ router.post('/item', async (req, res) => {
     const data = new Model({
         name: req.body.name,
         discription: req.body.discription,
-        type: req.body.type
+        type: req.body.type,
+        username: req.body.username
     })
 
     try {
@@ -162,4 +200,17 @@ router.delete('/delete/:id', async (req, res) => {
         res.status(400).json({ message: error.message })
     }
 })
+router.delete('/Rdelete/:id', async (req, res) => {
+    try {
+        const id = req.params.id;
+        const data = await Relation.findByIdAndDelete(id)
+        res.send(`Document with ${data.name} has been deleted..`)
+    }
+    catch (error) {
+        res.status(400).json({ message: error.message })
+    }
+})
+router.get("/", (req, res) => {
+    res.sendFile(__dirname + "/../newuibase.html");
+  });
 module.exports = router;
