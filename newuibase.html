@@ -10,61 +10,69 @@
     <title>Item Locater</title>
 </head>
 <body>
+    
     <!-- Navbar -->
     <div class="navbar">
         <div class="container flex">
+
+            <i class="bi bi-amd"  style="font-size: 44px;"></i>
             <h1 class="logo">Welcome to the Item Locater!</h1>
             <nav>
                 <ul>
-                    <li><a href="newuibase.html">Home</a></li>
-                    <li><a href="item-list.html" target="_blank">View all items</a></li>
-                    <!-- <li><a href="docs.html">Docs</a></li> -->
+                    <li><a href="item-list.html">All Items</a></li>
                 </ul>
             </nav>
         </div>
     </div>
-    
     <!-- Showcase -->
     <section class="showcase">
         <div class="container grid">
             <div class="showcase-text">
                 <h1>Here you can add items which you need to remember where you kept them</h1>
-                <p>Add items today!</p>
+                <button onclick="myFunction()" style="font-size: 30px;" type="button" class="btn btn-link">Get started and add your first item today!</button>
             </div>
-
             <div class="showcase-form card" id="addWindow">
                 <h2>Add an item</h2>
-                 <form>
                     <div class="form-control">
-                        <input type="text" name="name" placeholder="Name of item" id="postName" required>
+                        <input type="text" name="name" id="postName" placeholder="Name of item" required>
                     </div>
                     <div class="form-control">
-                        <input type="text" name="discription" id="postDiscription" placeholder="Description of item" required>
+                        <input type="text" name="discription" id="postDiscription" placeholder="Discription" required>
                     </div>
                     <div class="form-control">
-                        <!-- <input type="email" name="email" placeholder="Email" required> -->
-                        <select name="OC" id="postType">
+                        <select name="type" id="postType" required>
                             <option value="type">----type----</option>
-                            <option value="container">Container</option>
                             <option value="object">Object</option>
+                            <option value="container">Container</option>
                         </select>
                     </div>
-                    <input type="submit" value="Send" class="btn btn-primary" onclick="onPostSubmit()">
-                </form>
+                    <input type="submit"  onClick="onPostSubmit()" class="btn btn-primary">
+            </div>
+            <div class="showcase-form card" id="logWindow">
+                <h2>Sign Up!</h2>
+                    <div class="form-control">
+                        <input type="text" name="name" id="userName" placeholder="Username" required>
+                    </div>
+                    <div class="form-control">
+                        <input type="text" name="discription" id="password" placeholder="Password" required>
+                    </div>
+                    <input type="submit"  onClick="onLogSubmit()" class="btn btn-primary">
+                    <button class="btn btn-danger" onclick="backToItemlist()">Back</button>
             </div>
         </div>
-        <button id="fixedbutton" type="button" onclick="myFunction()" class="button" ><i class="bi bi-house-add-fill" style="font-size: 30px;"></i></button>
+        
     </section>
-
-    <!-- Stats
+    <!-- <button id="fixedbutton" type="button" onclick="myFunction()" class="button" ><i class="bi bi-house-add-fill" style="font-size: 30px;"></i></button> -->
+    
+    <!-- Stats -->
     <section class="stats">
         <div class="container">
             <h3 class="stats-heading text-center my-1">
-                All your existing items:
+                
             </h3>
 
             <div class="grid grid-3 text-center my-4">
-                <div>
+                <!-- <div>
                     <i class="fas fa-server fa-3x"></i>
                     <h3>10,349,405</h3>
                     <p class="text-secondary">Deployments</p>
@@ -78,31 +86,14 @@
                     <i class="fas fa-project-diagram fa-3x"></i>
                     <h3>2,343,265</h3>
                     <p class="text-secondary">Projects</p>
-                </div> 
-            <div class="showcase-form card">
-                <h2>Add an item</h2>
-                 <form>
-                    <div class="form-control">
-                        <input type="text" name="name" placeholder="Name of item" required>
-                    </div>
-                    <div class="form-control">
-                        <input type="text" name="discription" placeholder="Discription" required>
-                    </div>
-                    <div class="form-control">
-                        <input type="email" name="email" placeholder="Email" required> 
-                        <select name="OC" id="">
-                            <option value="type">----type----</option>
-                            <option value="container">Container</option>
-                            <option value="object">Object</option>
-                        </select>
-                    </div>-->
-
+                </div> -->
+                
             </div>
         </div>
     </section>
 
     <!-- Cli -->
-    <!--<section class="cli">
+    <!-- <section class="cli">
         <div class="container grid">
             <img src="https://raw.githubusercontent.com/bradtraversy/loruki-website/master/images/cli.png" alt="">
             <div class="card">
@@ -112,10 +103,10 @@
                 <h3>Deploy in seconds</h3>
             </div>
         </div>
-    </section>
+    </section> -->
 
-    Cloud 
-    <section class="cloud bg-primary my-2 py-2">
+    <!-- Cloud -->
+    <!-- <section class="cloud bg-primary my-2 py-2">
         <div class="container grid">
             <div class="text-center">
                 <h2 class="lg">Extreme Cloud Hosting</h2>
@@ -127,7 +118,7 @@
     </section> -->
 
     <!-- Languages -->
-    <!--<section class="languages">
+    <!-- <section class="languages">
         <h2 class="md text-center my-2">
             Supported Languages
         </h2>
@@ -185,6 +176,9 @@
                 <a href="#"><i class="fab fa-twitter fa-2x"></i></a>
             </div>
         </div>
-    </footer>
+    </footer> -->
+    <script>
+        src="newuibase.js"
+    </script>
 </body>
-</html> -->
+</html>
