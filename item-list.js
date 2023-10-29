@@ -1,6 +1,19 @@
 var currentItem = "";
 let ConName = "";
-var servername = "http://192.168.1.102:7800"
+let User = "not set";
+var servername = "http://192.168.1.126:3000"
+
+function backToItemlist(){
+  location.reload();
+}
+const setLog = () => {
+  document.getElementById('logWindow').style.display = "block";
+  document.getElementById('listWindow').style.display = "none";
+}
+const setLogOut = () => {
+  localStorage.setItem("None", log.userName);
+  alert("Logged Out")
+}
 const setPostModal = () => {
     document.getElementById('addWindow').style.display = "block";
     document.getElementById('listWindow').style.display = "none";
@@ -15,11 +28,31 @@ const setTileModal = () => {
   document.getElementById('tileInfo').style.display = "block";
   document.getElementById('listWindow').style.display = "none";
 }
-
-function backToItemlist(){
-  window.location="http://127.0.0.1:5500/item-list.html"
+const onlogSubmit = () => {
+  console.log(document.getElementById('userName').value);
+    console.log(document.getElementById('password').value);
+    let user = document.getElementById('userName').value;
+    let password = document.getElementById('password').value;
+    for (let log of logs)
+    {
+      console.log(user)
+      if(user == log.userName)
+      {
+        console.log("hello2")
+        if(password == log.password)
+        {
+          localStorage.clear();
+          localStorage.setItem("User", log.userName);
+          alert("Logged in as user " + localStorage.getItem('User'));
+          location.reload();
+        }
+        else
+        {
+          alert("Wrong password or username, please try again");
+        }
+      }
+    }
 }
-
 const onPostSubmit = () => {
     console.log(document.getElementById('postName').value);
     console.log(document.getElementById('postDiscription').value);
@@ -129,6 +162,7 @@ const onEditSubmit = () => {
 };
 
 const setEditModal = (id) => {
+  document.getElementById('relation-window').style.display = "none";
     currentItem = id;
     document.getElementById('tileInfo').style.display = "none";
     document.getElementById('editWindow').style.display = "block";
@@ -136,7 +170,6 @@ const setEditModal = (id) => {
     const xhttp = new XMLHttpRequest();
     xhttp.open("GET", servername+`/api/getOne/${id}`, false);
     xhttp.send();
-
     const book = JSON.parse(xhttp.responseText);
     const {
         name,
@@ -205,6 +238,18 @@ const loadBooks = () => {
 
     displayBooks(books); // Call the displayBooks function with the retrieved books data
 }
+let logs = [];
+const loadLogs = () => {
+  const xhttp = new XMLHttpRequest();
+
+  xhttp.open("GET", servername +"/api/allLog", false);
+  xhttp.send();
+
+  logs = JSON.parse(xhttp.responseText); // Store the books in the 'books' array
+  for (let log of logs) {
+    // ...
+  }
+}
 
 
 let relations = [];
@@ -217,7 +262,6 @@ const loadRelations = () => {
     xhttp.send();
 
     relations = JSON.parse(xhttp.responseText); // Store the books in the 'books' array
-
     for (let relation of relations) {
         // ...
     }
@@ -264,13 +308,13 @@ const disp_getContainer = (item_name) => {
   return(container_name)
 
 }
-
 const ConTile = (Name) => {
 for(let book of books)
 {
   if(Name == book.name)
   {
-    tileInfo(book._id)
+    tileInfo(book._id);
+    loadObjectsInSelectBox(book._id);
   }
 }
 }
@@ -279,12 +323,12 @@ const TileModal = () => {
     location.reload();
 }
 
-  document.getElementById('selection-drop')
-
 const tileInfo = (id) => {
+  document.getElementById('relation-window').style.display = "block";
   document.getElementById('fixedbutton2').style.display = "block";
   document.getElementById('fixedbutton3').style.display = "block";
   document.getElementById('fixedbutton4').style.display = "block";
+  
   let container_name = "not set";
   let objects = [];
     currentItem = id;
@@ -319,11 +363,20 @@ const tileInfo = (id) => {
     for(rel of relations){
       if(name == rel.container_name)
       {
-        const x = `<div class="tile3">
-                  <h2 name="name" style="text-transform: capitalize; color: antiquewhite;">${rel.item_name}</h2>
-                  <p style="color: antiquewhite;">Description for Tile.</p>
+        for(let book3 of books){
+          if(rel.item_name == book3.name){
+            const x = `<div class="tile3">
+                  <button class="btn btn-link" onClick="tileInfo('${book3._id}');loadObjectsInSelectBox('${book3._id}');" id="sub-tile"name="name" style="text-transform: capitalize; color: antiquewhite;">${rel.item_name}</button>
+                  <p style="color: antiquewhite; 
+                  white-space: nowrap;
+                  overflow: hidden;
+                  text-overflow: ellipsis;
+                  max-width: 17ch;">${book3.discription}</p>
                  </div>`;
                  TileBar.innerHTML += x;
+          }
+        }
+        
       }
       if(name == rel.item_name)
       {
@@ -333,11 +386,21 @@ const tileInfo = (id) => {
           {
             if(rel2.item_name != name)
             {
-              const x = `<div class="tile3">
-              <h2 name="name" style="text-transform: capitalize; color: antiquewhite;">${rel2.item_name}</h2>
-              <p style="color: antiquewhite;">Description for Tile.</p>
+              
+              for(let book2 of books){
+                if(rel2.item_name == book2.name)
+                {
+                  const x = `<div class="tile3">
+              <button class="btn btn-link" onClick="tileInfo('${book2._id}');loadObjectsInSelectBox('${book2._id}');"id="sub-tile" name="name" style="text-transform: capitalize; color: antiquewhite;">${rel2.item_name}</button>
+              <p style="color: antiquewhite;
+              white-space: nowrap;
+              overflow: hidden;
+              text-overflow: ellipsis;
+              max-width: 17ch;">${book2.discription}</p>
              </div>`;
              TileBar.innerHTML += x;
+                }
+              }
             }
             
           }
@@ -381,12 +444,12 @@ const displayBooks = (books) => {
       // let item = send_tileInfo(book.name)
       // console.log(item)
       //let related_objects = disp_related_objects(book.name)
-
+      // col-xs-12
       const x = `
-          <div class="col-4">
+          <div class="col-12 col-md-4">
               <div class="card">
                   <div class="card-body">
-                      <h3 onclick="tileInfo('${book._id}')" type="button" class="card-title" style="text-transform: capitalize;"><b>${icon_type} ${book.name}</b></h3>
+                      <h3 onclick="tileInfo('${book._id}');loadObjectsInSelectBox('${book._id}');" type="button" class="card-title" style="text-transform: capitalize;"><b>${icon_type} ${book.name}</b></h3>
                       <h6 class="card-title"></h6>
                       <h7 style="
                       display:inline-block;
@@ -396,7 +459,11 @@ const displayBooks = (books) => {
                       max-width: 23ch;" class="card-subtitle mb-2 text-muted">${book.discription}</h6>&nbsp;
                       &nbsp;
                       <h6 class="card-subtitle mb-2 text-muted"><b>Conatiner: ${container_name}</b></h6>
-                      
+                      <h6 class="card-subtitle mb-2 text-muted"><b>Restricted:</b></h6>
+                      <label class="switch">
+                      <input id="restricted" onclick="setUser('${book._id}')" type="checkbox">
+                      <span class="slider round"></span>
+                      </label>
                     
                       <hr>
                       <div class="btn-group" role="group">
@@ -412,14 +479,161 @@ const displayBooks = (books) => {
         booksContainer.innerHTML += x;
     }
 }
+const setUser = (id) => {
+  // if(checkbox.checked){
+    const data = {
+      username: localStorage.getItem('User')
+    };
+  let xhr = new XMLHttpRequest();
+  xhr.open("POST", servername+"/api/update/" + id);
+  xhr.setRequestHeader("Accept", "application/json");
+  xhr.setRequestHeader("Content-Type", "application/json");
 
+  xhr.onreadystatechange = function () {
+    if (xhr.readyState === 4) {
+      console.log(xhr.status);
+      console.log(xhr.responseText);
+      // Call the loadbooks function here if the update was successful
+    }
+  };
+
+  xhr.send(JSON.stringify(data));
+// }
+// else
+// {
+//   const data = {
+//     username: "not set"
+//   };
+// let xhr = new XMLHttpRequest();
+// xhr.open("POST", servername+"/api/update/" + id);
+// xhr.setRequestHeader("Accept", "application/json");
+// xhr.setRequestHeader("Content-Type", "application/json");
+
+// xhr.onreadystatechange = function () {
+//   if (xhr.readyState === 4) {
+//     console.log(xhr.status);
+//     console.log(xhr.responseText);
+//     // Call the loadbooks function here if the update was successful
+//   }
+// };
+
+// xhr.send(JSON.stringify(data));
+// }
+}
+function loadContainersInSelectBox() {
+  const containerSelector = document.getElementById("container_selector");
+  const apiUrl = servername+"/api/getAll?type=container";
+  if (apiUrl) {
+      fetch(apiUrl)
+          .then(response => response.json())
+          .then(data => {
+              for (let i = 0; i < data.length; i++) {
+                  const opt = document.createElement("option");
+                  opt.value = data[i].name;
+                  opt.innerHTML = data[i].name;
+                  containerSelector.appendChild(opt);
+              }
+              containerSelector.addEventListener("change", function() {
+                  const index = containerSelector.selectedIndex;
+                  const containerInfo = document.getElementById("container_info");
+                  containerInfo.innerHTML = `
+                      <p>Name: ${data[index].name}</p>
+                      <p>Description: ${data[index].discription}</p>
+                      <p>Type: ${data[index].type}</p>
+                  `;
+              });
+          })
+          .catch(error => console.error(error));
+  }
+}
+
+const loadObjectsInSelectBox = (id) => {
+  const objectSelector = document.getElementById("object_selector");
+  const apiUrl = servername+ "/api/getOne/" + id;
+  if (apiUrl) {
+      fetch(apiUrl)
+          .then(response => response.json())
+          .then(data => {
+              
+                  const opt = document.createElement("option");
+                  opt.value = data.name;
+                  opt.innerHTML = data.name;
+                  objectSelector.appendChild(opt);
+              
+              objectSelector.addEventListener("change", function() {
+                  const index = objectSelector.selectedIndex;
+                  const objectInfo = document.getElementById("object_info");
+                  objectInfo.innerHTML = `
+                      <p>Name: ${data[index].name}</p>
+                      <p>Description: ${data[index].discription}</p>
+                      <p>Type: ${data[index].type}</p>
+                  `;
+              });
+          })
+          .catch(error => console.error(error));
+  }
+}
+
+function submitData() {
+  let id = "";
+  const submitButton = document.getElementById("submit_button");
+  const objectSelector = document.getElementById("object_selector");
+  const containerSelector = document.getElementById("container_selector");
+
+  submitButton.addEventListener("click", function() {
+      const selectedObject = objectSelector.value;
+      const selectedContainer = containerSelector.value;
+
+      const apiUrl = servername+"/api/relation";
+      const requestBody = {
+          item_name: selectedObject,
+          container_name: selectedContainer
+      };
+
+    for(let rel of relations){
+      if(rel.item_name == selectedObject)
+      {
+        id = rel._id;
+      }
+    }
+    const xhttp = new XMLHttpRequest();
+
+    xhttp.open("DELETE", servername+`/api/Rdelete/` + id, false);
+    xhttp.send();
+
+      fetch(apiUrl, {
+          method: "POST",
+          headers: {
+              "Content-Type": "application/json"
+          },
+          body: JSON.stringify(requestBody)
+      })
+      .then(response => response.json())
+      .then(data => {
+          console.log("Data saved successfully:", data);
+          // Perform any further actions after data is saved
+      })
+      .catch(error => console.error("Error saving data:", error));
+  });
+  
+}
+const setModal = () => {
+  location.reload();
+}
 document.getElementById('editWindow').style.display = "none";
+document.getElementById('relation-window').style.display = "none";
 document.getElementById('addWindow').style.display = "none";
-document.getElementById('relationWindow').style.display = "none";
 document.getElementById('tileInfo').style.display = "none";
+document.getElementById('logWindow').style.display = "none";
 loadRelations();
+loadLogs();
 loadBooks();
+loadContainersInSelectBox();
+submitData();
 
 // Add event listener for search input
 const searchInput = document.getElementById('searchInput');
 searchInput.addEventListener('input', handleSearch);
+const setPage = () => {
+  location.reload();
+}
