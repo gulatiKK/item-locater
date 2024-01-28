@@ -6,64 +6,63 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.1/css/bootstrap.min.css" integrity="sha512-yxUu0bO5ZxSNV4de0yqMxMZb2jx3i85zPYIR5hAxH0CwpkzGlPz/ZfZllcOYN20oULtuMQ/htz+8y2gDJAZXnQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>Document</title>
 </head>
 <body style="background-color:#123;"></body>
 
 <body>
-    
+    <p id="logStatus" class="login"></p>
+    <p id="log" class="login"></p>
     <div class="navbar">
         <div class="container col-xs">
 
-            <i class="bi bi-amd" onclick="setPage()" style="font-size: 44px;"></i>
+            <i class="bi bi-amd" onclick="location.reload()" style="font-size: 44px;"></i>
             <h1 style="color: antiquewhite;" class=""><a href="newuibase.html">The Item Locater!</a></h1>
             <nav>
-                <ul>
-                    <li class="home"><a onclick="setLog()">Log In</a></li>
-                    <li class="home"><a onclick="setLogOut()">Log Out</a></li>
+                <ul id="navBar">
+                    <li id="Li1" class="home"><a onclick="onSignModal()">Sign Up</a></li>
+                    <li id="Li2" class="home"><a onclick="setLog()">Log In</a></li>
                 </ul>
             </nav>
         </div>
     </div>
+
+    <div class="showcase-form card" id="signWindow">
+        <h2>Sign Up!</h2>
+            <div class="form-control">
+                <input type="text" name="name" id="userSignUpName" placeholder="Username" required>
+            </div>
+            <div class="form-control">
+                <input type="text" name="discription" id="signUpPassword" placeholder="Password" required>
+            </div>
+            <input type="submit"  onClick="onSignSubmit()" class="btn btn-primary">
+            <button class="btn btn-danger" onclick="backToItemlist()">Back</button>
+    </div>
+
+<!-- Start Section: Item View Page -->
     <div id="tileInfo">
-    <button id="fixedbutton2" type="button" onclick="TileModal()" class="button"><i class="bi bi-house-door" style="font-size: 30px;"></i></button>
-    <button id="fixedbutton3" type="button" class="button2"><i class="bi bi-trash" style="font-size: 30px;"></i></button>
-    <button id="fixedbutton4" type="button" onclick="TileModal()" class="button3"><i class="bi bi-pencil-square" style="font-size: 30px;"></i></button>
+        <!-- Start Panel: Action Buttons -->
+        <button id="fixedbutton2" type="button" onclick="TileModal()" class="button"><i class="bi bi-house-door" style="font-size: 30px;"></i></button>
+        <button id="fixedbutton3" type="button" class="button2"><i class="bi bi-trash" style="font-size: 30px;"></i></button>
+        <button id="fixedbutton4" type="button" onclick="TileModal()" class="button3"><i class="bi bi-pencil-square" style="font-size: 30px;"></i></button>
+        <!-- Start Panel: Item View -->
+
+        <!-- Start Panel: Other Objects In Container View -->
         <div class="tile container col">
             <h2 name="name" style="text-transform: capitalize; color: antiquewhite;" id="TileName">Title</h2>
             <p style="color: antiquewhite; max-width: 100ch; overflow: auto; max-height: 6.5ch;" for="TileDiscription" id="TileDescription" >Description for Tile.</p>
           </div>
+          <p id="itemUser"></p>
           <div class="tile2">
-            <h2 name="name" style="text-transform: capitalize; color: antiquewhite;">Container:</h2>
-            <button class="btn btn-link" id="ConName"><p style="color: antiquewhite;">Container Name</p></button>
+            <h2 name="name" class="btn-link" id="ConTitle" style="text-transform: capitalize; color: antiquewhite;">Container:</h2>
+            <select id="container_selector" name="container_selector" class="form-select form-select-lg mb-3 animate_animated animatepulse animate_infinite">
+            </select>
           </div>
           &nbsp;<h3 style="color: antiquewhite;">--Related Objects and Containers:--</h3>
         <div class="objectTiles" id="TileBar">
         </div>
     </div>
-    <div class="container mt-5 relation-window" id="relation-window">
-        <div class="row">
-            <div class="col-lg-6 col-md-12 mb-3 objects" id="objects">
-                <label style="color: antiquewhite;" for="object_selector" class="form-label">Select Object:</label>
-                <select id="object_selector" name="object_selector" class="form-select form-select-lg mb-3 animate_animated animatepulse animate_infinite">
-                </select>
-                <br>
-                <div style="color: antiquewhite;" id="object_info"></div>
-                <br>
-            </div>
-
-            <div class="col-lg-6 col-md-12 mb-3 objects" id="containers">
-                <label style="color: antiquewhite;" for="container_selector" class="form-label">Select Container:</label>
-                <select id="container_selector" name="container_selector" class="form-select form-select-lg mb-3 animate_animated animatepulse animate_infinite">
-                </select>
-                <br>
-                <div style="color: antiquewhite;" id="container_info"></div>
-            </div>
-        </div>
-        
-        <button id="submit_button" onclick="setModal()" class="btn btn-primary">Submit</button>
-    </div>
+<!-- End Section: Item View Page -->
 
     <section class="showcase">
         <div class="container grid">
@@ -99,16 +98,21 @@
                     <option value="container">Container</option>
                 </select>
             </div>
+            <label class="switch2">
+            <input id="postToggle"  type="checkbox">
+            <span class="slider round"></span>
+            </label>
             <input type="submit"  onClick="onPostSubmit()" class="btn btn-primary">
             <button class="btn btn-danger" onclick="backToItemlist()">Back</button>
+            <p id="togText">Private:</p>
     </div>
     <div class="showcase-form card" id="logWindow">
         <h2>Log In</h2>
             <div class="form-control">
-                <input type="text" name="name" id="userName" placeholder="User Name" required>
+                <input type="text" name="name" id="userName" placeholder="Username" required>
             </div>
             <div class="form-control">
-                <input type="text" name="discription" id="password" placeholder="password" required>
+                <input type="password" name="discription" id="password" placeholder="Password" required>
             </div>
             <input type="submit"  onClick="onlogSubmit()" class="btn btn-primary">
             <button class="btn btn-danger" onclick="backToItemlist()">Back</button>
@@ -140,7 +144,13 @@
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="item-info.js"></script>
+    <script src="item-relation.js"></script>
     <script src="item-list.js"></script>
+    <script src="item-modal.js"></script>
+    <script src="item-login.js"></script>
+    <script src="item-status.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="item-list.css">
     <button id="fixedbutton" type="button" onclick="setPostModal()" class="btn btn-secondary" ><i class="bi bi-plus-circle-fill" style="font-size: 30px;"></i></button>
     <button id="fixedbutton" type="button" onclick="setPostModal()" class="btn btn-secondary" ><i class="bi bi-plus-circle-fill" style="font-size: 30px;"></i></button>
