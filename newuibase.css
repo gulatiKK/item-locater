@@ -63,7 +63,7 @@ pre {
 
 /* Navbar */
 .navbar {
-  background-color: var(--primary-color);
+  background-color: #000000;
   color: #fff;
   height: 70px;
 }
