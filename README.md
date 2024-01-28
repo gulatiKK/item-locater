@@ -11,6 +11,7 @@ as you will discover each item and container can be stored in another container.
 For example:
 You would like to save your item 'shoes' to the container 'cupboard' you will simply relate these two and them the cupboard will show as the container of shoes until you wish to change the location or delete the item.
 Before you run the code follow this checklist
-1. Enter this command in terminal or cmd, $ npm i express mongoose nodemon dotenv
-1. Use the connectMe.js file to connect the mongoDB repository to you computer
+1. Enter this command in terminal or cmd, $ npm i express mongoose nodemon dotenv mongodb jquery nodejs router 
+1. Run $node connectMe.js in a new terminal to connect the mongoDB repository to you computer
+2. Run $nodemon index.js to run the server
 1. That's it from our readme page and we hope you have a great experince, Thankyou
