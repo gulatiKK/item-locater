@@ -25,7 +25,6 @@ router.post('/log', async (req, res) => {
         userName: req.body.userName,
         password: req.body.password
     })
-
     try {
         const dataToSave = await data.save();
         res.status(200).json(dataToSave)
@@ -114,7 +113,8 @@ router.post('/item', async (req, res) => {
         name: req.body.name,
         discription: req.body.discription,
         type: req.body.type,
-        username: req.body.username
+        username: req.body.username,
+        status: req.body.status
     })
 
     try {
