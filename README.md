@@ -13,7 +13,7 @@ You would like to save your item 'shoes' to the container 'cupboard' you will si
 Before you run the code follow this checklist
 1. Run $npm init to load packages
 2. Enter this command in terminal or cmd, $npm i express mongoose nodemon dotenv mongodb jquery nodejs router 
-1. Run $node connectMe.js in a new terminal to connect the mongoDB repository to you computer
-1. Go into the package.json file and change line number 7 to "start": "nodemon index.js"
-2. Run $npm start to start server, to accesss website, type localhost:3000 in searchbar and enter
-1. That's it from our readme page and we hope you have a great experince, Thankyou
+3. Run $node connectMe.js in a new terminal to connect the mongoDB repository to you computer
+4. Go into the package.json file and change line number 7 to "start": "nodemon index.js"
+5. Run $npm start to start server, to accesss website, type localhost:3000 in searchbar and enter
+6. That's it from our readme page and we hope you have a great experince, Thankyou
