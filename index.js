@@ -1,12 +1,14 @@
-const port = 7800
+require('dotenv').config();
+const port = process.env.SERVICE_PORT
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const router = express();
 router.use(cors());
+const mongoString = process.env.DATABASE_URL;
 
-mongoose.connect('mongodb+srv://KrishnaG:Mongo12345@cluster0.g6wjezd.mongodb.net/?retryWrites=true&w=majority');
+mongoose.connect(mongoString);
 const database = mongoose.connection;
 
 database.on('error', (error) => {
@@ -25,5 +27,6 @@ app.listen(port, () => {
     console.log(`Server Started at ${port}`)
 })
 const routes = require('./routes/routes');
-
 app.use('/api', routes)
+const mainRoute = require('./routes/mainRoute');
+app.use('/', mainRoute)
